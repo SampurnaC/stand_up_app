@@ -1,0 +1,53 @@
+.table-responsive
+%h2 Work Logs
+%table.table.log
+  %thead
+    %tr
+      - if current_page?(users_path)
+        %th= sortable "id", "ID"
+        %th= sortable "name", "Name"
+      - else
+        %th ID
+        %th Name  
+      %th Start At
+      %th End At
+      %th Work Log of Today (HH:MM:SS)
+      - if current_page?(users_path)
+        %th= sortable "created_at", "Created At"
+      - else
+        %th Created At  
+      %th Status
+      - unless current_page?(users_path)
+        %th Action
+  %tbody
+    - @users.each do |user|
+      %tr
+        #task-form{:style => "display:none;"}
+        %td= user.id
+        %td= user.name
+        %td= user.start_at
+        %td= user.end_at
+        - if user.start_at.strftime("%m/%d/%Y") && user.end_at.strftime("%m/%d/%Y") == Date.today.strftime("%m/%d/%Y")
+          - time_diff = user.end_at - user.start_at
+          - formatted_time_diff = Time.at(time_diff.round.abs).utc.strftime "%H:%M:%S"
+          %td= formatted_time_diff
+        - else
+          %td cannot be calculated of previous dates
+        %td= user.created_at.strftime("%m/%d/%Y")
+        - previous_date = Date.yesterday.strftime("%m/%d/%Y")
+        - current_date = Date.today.strftime("%m/%d/%Y")
+        - if user.created_at.strftime("%m/%d/%Y") == previous_date
+          %td Present
+        - elsif user.created_at.strftime("%m/%d/%Y") == current_date
+          %td Present
+        - else
+          %td Absent
+        - unless current_page?(users_path)
+          %td
+            - if user.created_at.strftime("%m/%d/%Y") == DateTime.now.strftime("%m/%d/%Y")
+              = link_to "Edit", edit_user_path(user), remote: true
+            #task-form{:style => "display:none;"}
+            - if user.created_at.strftime("%m/%d/%Y") == DateTime.now.strftime("%m/%d/%Y")
+              &nbsp;|&nbsp;
+              = link_to user_path(user.id), remote: true, method: 'delete', data: { confirm: 'Are you sure you want to delete?', turbolinks: false, disable_with: 'Processing...'}, class: "delete-blog" do
+                %i.fa.fa-trash

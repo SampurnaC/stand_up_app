@@ -1,0 +1,23 @@
+- content_for(:title, "New User")
+
+= render partial: "shared/alerts"
+.container-fluid
+  .col-md-12
+    %h1 Users > New
+    = form_for @stand_up, :as => :user, :url => users_path, :html => { :multipart => true }  do |f|
+      .col-md-3.form-group
+        = f.label :name
+        = f.text_field :name, class: "form-control"
+
+
+      .col-md-6.form-group
+        = f.label :start_at
+        = f.datetime_select :start_at, class: "form-control"
+
+      .col-md-6.form-group
+        = f.label :end_at
+        = f.datetime_select :end_at
+      .actions
+        = submit_tag "Create", { :class => "btn btn-primary", :id => "submit" }
+    = render :partial => "form"
+    = link_to "List Users", users_path, {class: "btn btn-primary"}

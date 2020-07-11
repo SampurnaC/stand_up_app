@@ -1,0 +1,22 @@
+.container-fluid
+  .row.mt-3.mb-3
+    .col-md-12
+      %h1 Edit this worklog
+      %span
+        %h2= @user.name
+      
+      = form_for @user, :as => :user, :url => user_path(@user.id), :html => { :multipart => true }  do |f|
+        .col-md-3.form-group
+          = f.label :name
+          = f.text_field :name, class: "form-control"
+
+
+        .col-md-6.form-group
+          = f.label :start_at
+          = f.datetime_select :start_at
+
+        .col-md-6.form-group
+          = f.label :end_at
+          = f.datetime_select :end_at
+        .form-group.mt-3.mb-3
+          = f.submit "Update", class: "btn btn-primary"

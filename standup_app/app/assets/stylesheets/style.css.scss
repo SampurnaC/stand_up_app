@@ -1,0 +1,41 @@
+.log th .current {
+  padding-right: 35px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.log th .asc {
+  background-image: url(/images/up.png);
+}
+
+.log th .desc {
+  background-image: url(/images/down.png);
+}
+form input[type=text].search {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 20pc;
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+form button {
+  float: left;
+  width: 4pc;
+  padding: 7px;
+  background: #007bff;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+.standup-list {
+  background-color: beige;
+}
+.reset-and-export {
+  margin-top: 17px;
+  margin-bottom: 17px;
+}

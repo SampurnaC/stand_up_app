@@ -1,0 +1,12 @@
+.container-fluid
+  = form_tag(users_path, method: :get)do
+    = text_field_tag(:search, params[:search], placeholder: 'Search by name', class: 'form-control search')
+    = button_tag(type: "submit") do
+      %i.fa.fa-search
+  .table-responsive
+    = link_to "Reset", users_path, class: "btn btn-primary reset-and-export"
+    = link_to "Export Stand Ups",users_path(format: "csv", direction: params["direction"], sort: params["sort"], search: params["search"]), :class => "btn btn-primary reset-and-export"
+    %h2 Users
+    = render :partial => "form"
+    
+  = link_to "Add Entry", new_user_path, class: "btn btn-primary"
