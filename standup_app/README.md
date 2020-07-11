@@ -4,6 +4,7 @@ This README would normally document whatever steps are necessary to get the
 application up and running.
 
 Steps
+* git clone https://github.com/SampurnaC/stand_up_app
 * use ruby 2.7.1, rails 6.0.3.2, node 12.16.0
 * npm install
 * bundle install

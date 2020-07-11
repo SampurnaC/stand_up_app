@@ -8,7 +8,6 @@ module UsersHelper
   end
 
   def generate_csv(users)
-
     column_names = [
       "ID","NAME", "Start At", "End At", "Work Log"
     ]
