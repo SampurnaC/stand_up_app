@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "Admin::Users" do
+feature "Users" do
   before do
     @user = User.create!(name: "test username", start_at: 3.days.ago, end_at: 2.days.ago, created_at: 2.days.ago)
   end
@@ -76,15 +76,6 @@ feature "Admin::Users" do
       expect(page).to have_xpath("//table[@class='table log']/tbody/tr/td", text: "Present")
     end
 
-    # it "should have edit and delete buttons" do
-    #   binding.pry
-
-    #   @user.update(created_at:  DateTime.now.strftime("%m/%d/%Y"))
-    #   @user.update(created_at: @user.created_at.strftime('%m/%d/%Y'))
-    #   expect(page).to have_content "Edit"
-    #   expect(page).to have_content "Delete"
-    # end
-
   end
 
   describe "POST #create" do
@@ -108,7 +99,6 @@ feature "Admin::Users" do
       find(:xpath, "//a[@href='/users']").click
       expect(current_path).to eq '/users'
     end
-
   end
 
 end
