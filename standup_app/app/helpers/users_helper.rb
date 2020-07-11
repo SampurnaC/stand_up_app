@@ -18,7 +18,11 @@ module UsersHelper
         if m.start_at.strftime("%m/%d/%Y") && m.end_at.strftime("%m/%d/%Y") == Date.today.strftime("%m/%d/%Y")
           time_diff = m.end_at - m.start_at
           work_log = Time.at(time_diff.round.abs).utc.strftime "%H:%M:%S"
+        elsif m.start_at.strftime("%m/%d/%Y") && m.end_at.strftime("%m/%d/%Y") == Date.yesterday.strftime("%m/%d/%Y")
+          time_diff = m.end_at - m.start_at
+          work_log = Time.at(time_diff.round.abs).utc.strftime "%H:%M:%S"
         end
+
         row = [
           m.id, m.name, m.start_at, m.end_at, work_log
         ]

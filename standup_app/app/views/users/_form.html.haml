@@ -31,7 +31,11 @@
           - time_diff = user.end_at - user.start_at
           - formatted_time_diff = Time.at(time_diff.round.abs).utc.strftime "%H:%M:%S"
           %td= formatted_time_diff
-        - else
+        - elsif user.start_at.strftime("%m/%d/%Y") && user.end_at.strftime("%m/%d/%Y") == Date.yesterday.strftime("%m/%d/%Y")
+          - time_diff = user.end_at - user.start_at
+          - formatted_time_diff = Time.at(time_diff.round.abs).utc.strftime "%H:%M:%S"
+          %td= formatted_time_diff
+        - else  
           %td cannot be calculated of previous dates
         %td= user.created_at.strftime("%m/%d/%Y")
         - previous_date = Date.yesterday.strftime("%m/%d/%Y")
