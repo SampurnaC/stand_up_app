@@ -1,5 +1,5 @@
 .container-fluid
-  = form_tag(users_path, method: :get)do
+  = form_tag(users_path, method: :get, style: "margin-top: 10px;") do
     = text_field_tag(:search, params[:search], placeholder: 'Search by name', class: 'form-control search')
     = button_tag(type: "submit") do
       %i.fa.fa-search

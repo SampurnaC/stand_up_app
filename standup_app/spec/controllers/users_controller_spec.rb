@@ -30,7 +30,7 @@ RSpec.describe UsersController, type: :controller do
       expect(response.headers["Content-Disposition"]).to eq "attachment; filename=\"standup-listings.csv\"; filename*=UTF-8''standup-listings.csv"
       csv_data = CSV.parse(response.body)
       csv_header = csv_data.shift
-      expect(csv_header).to match_array ["ID", "NAME", "Work Log"]
+      expect(csv_header).to match_array ["ID", "NAME", "Start At", "End At", "Work Log"]
     end
   end
   
@@ -50,9 +50,10 @@ RSpec.describe UsersController, type: :controller do
   describe "#destroy" do
     it "should delete work log" do
       @user = User.create!(name: "test username", start_at: 1.hour.ago, end_at: Date.today)
-      expect { delete :destroy, params: { id: @user.id } }.to change(User, :count).by(-1)
+      expect(User.count).to eq(5)
+      delete :destroy, params: {id:  @user.id}, format: "js"
+      expect(User.count).to eq(4)
       expect(flash[:notice]).to be_present
-      expect(response).to redirect_to root_path
     end
   end
 

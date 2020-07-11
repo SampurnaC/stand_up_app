@@ -10,17 +10,17 @@ module UsersHelper
   def generate_csv(users)
 
     column_names = [
-      "ID","NAME", "Work Log"
+      "ID","NAME", "Start At", "End At", "Work Log"
     ]
     CSV.generate(force_quotes: true) do |csv|
       csv << column_names
       users.each do |m|
         if m.start_at.strftime("%m/%d/%Y") && m.end_at.strftime("%m/%d/%Y") == Date.today.strftime("%m/%d/%Y")
           time_diff = m.end_at - m.start_at
-          hehe = Time.at(time_diff.round.abs).utc.strftime "%H:%M:%S"
+          work_log = Time.at(time_diff.round.abs).utc.strftime "%H:%M:%S"
         end
         row = [
-          m.id, m.name, hehe
+          m.id, m.name, m.start_at, m.end_at, work_log
         ]
         csv << row
       end
