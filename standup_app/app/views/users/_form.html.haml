@@ -1,3 +1,4 @@
+#task-form{:style => "display:none;"}
 .table-responsive
 %h2 Work Logs
 %table.table.log
@@ -50,8 +51,6 @@
           %td
             - if user.created_at.strftime("%m/%d/%Y") == DateTime.now.strftime("%m/%d/%Y")
               = link_to "Edit", edit_user_path(user), remote: true
-            #task-form{:style => "display:none;"}
-            - if user.created_at.strftime("%m/%d/%Y") == DateTime.now.strftime("%m/%d/%Y")
               &nbsp;|&nbsp;
               = link_to user_path(user.id), remote: true, method: 'delete', data: { confirm: 'Are you sure you want to delete?', turbolinks: false, disable_with: 'Processing...'}, class: "delete-blog" do
                 %i.fa.fa-trash
